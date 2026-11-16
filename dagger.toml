@@ -1,0 +1,14 @@
+[modules.rails]
+source = ".dagger/modules/rails"
+
+[modules.rubocop]
+source = "github.com/dagger/ruby/rubocop@main"
+
+[modules.bundler-audit]
+source = "github.com/dagger/ruby/bundler-audit@main"
+
+[modules.brakeman]
+source = "github.com/dagger/ruby/brakeman@main"
+
+[modules.postgres]
+source = ".dagger/modules/postgres"
