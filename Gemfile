@@ -11,4 +11,5 @@ end
 
 group :test do
   gem "pg"
+  eval_gemfile "dagger.gemfile"
 end
