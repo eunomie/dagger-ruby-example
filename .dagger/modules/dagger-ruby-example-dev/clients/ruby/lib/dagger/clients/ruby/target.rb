@@ -4,8 +4,8 @@ module Dagger
   module Clients
     module Ruby
       NAME = "ruby".freeze
-      REF = "github.com/dagger/ruby/ruby@8cb0f248e67e833ee4d12eb0bae32622e54fc418".freeze
-      PIN = "8cb0f248e67e833ee4d12eb0bae32622e54fc418".freeze
+      REF = "github.com/dagger/ruby/ruby@11179d8121ce13f4eff461bd5564e9c0db05787e".freeze
+      PIN = "11179d8121ce13f4eff461bd5564e9c0db05787e".freeze
       CORE_DIGEST = "sha256:78b7f2afb3fa97b76499a5842060cb2ef5e02c214a1f2b920a3d61fcab4c62f3".freeze
     end
   end
