@@ -1,0 +1,4 @@
+sdk/** linguist-generated
+clients/** linguist-generated
+.dagger/modules/*/sdk/** linguist-generated
+.dagger/modules/*/clients/** linguist-generated

@@ -1,0 +1,22 @@
+{
+  "lib/rails.rb": [
+    {
+      "class": "Rails",
+      "nesting": [
+        "Rails"
+      ],
+      "methods": {
+        "test": {
+          "line": 13,
+          "params": [
+            {
+              "name": "ws",
+              "type": "Dagger::Clients::Core::Workspace"
+            }
+          ],
+          "returns": "void"
+        }
+      }
+    }
+  ]
+}

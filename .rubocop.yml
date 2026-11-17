@@ -1,0 +1,21 @@
+plugins:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.4
+  Exclude:
+    - "bin/*"
+    - "db/schema.rb"
+    - "sdk/**/*"
+    - "clients/**/*"
+    - "dagger.gemfile"
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

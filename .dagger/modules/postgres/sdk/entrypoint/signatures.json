@@ -1,0 +1,17 @@
+{
+  "lib/postgres.rb": [
+    {
+      "class": "Postgres",
+      "nesting": [
+        "Postgres"
+      ],
+      "methods": {
+        "service": {
+          "line": 12,
+          "params": [],
+          "returns": "Dagger::Clients::Core::Service"
+        }
+      }
+    }
+  ]
+}
