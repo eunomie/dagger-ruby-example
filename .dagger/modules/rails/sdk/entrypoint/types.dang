@@ -10,6 +10,12 @@ type ModuleTypes {
             .withCheck
             .withArg("ws", typeDef.withObject("Workspace"))
         )
+        .withFunction(
+          function("server", typeDef.withObject("Service"))
+            .withDescription("Serve the app in development with `bin/rails server` on port 3000, after `bin/rails db:prepare`. Rails only answers its development hosts, such as localhost.")
+            .withUp
+            .withArg("ws", typeDef.withObject("Workspace"))
+        )
         .withConstructor(
           function("", typeDef.withObject("Rails"))
         ),

@@ -8,7 +8,8 @@ Minitest test that starts Postgres through a generated module client.
 - `app/`, `config/`, `db/schema.rb`, `test/`: a Rails 8.1 app on SQLite.
 - `test/integration/postgres_container_test.rb`: starts Postgres from the Postgres module and queries it.
 - `.dagger/modules/postgres/`: a Ruby SDK module whose `service` returns a Postgres service.
-- `.dagger/modules/rails/`: a Ruby SDK module whose `test` check runs `bin/rails test`.
+- `.dagger/modules/rails/`: a Ruby SDK module whose `test` check runs `bin/rails test` and whose `server`
+  serves the app.
 - `dagger.toml`, `dagger.lock`: the workspace modules and their pinned refs.
 - `sdk/`, `clients/`, `dagger.gemfile`: the generated Ruby SDK and module client, `test` group only. Do not edit them.
 
@@ -19,7 +20,9 @@ Minitest test that starts Postgres through a generated module client.
 | `dagger check` | Runs every check, including `rubocop:lint`, `rails:test`, `bundler-audit:audit` and `brakeman:scan`. |
 | `dagger check rails:test` | Runs `bin/rails test`, including the Postgres test. |
 | `dagger generate` | Regenerates `sdk/` and `clients/`. |
+| `dagger start` | Serves Postgres on port 5432 and the Rails app on port 3000. |
 | `dagger start postgres:service` | Serves Postgres on port 5432. |
+| `dagger start rails:server` | Serves only the Rails app on http://localhost:3000. |
 
 ## Test dependencies as code
 
@@ -47,8 +50,8 @@ dagger run bin/rails test test/integration
 The engine resolves a module client's local module path against the module that runs the code, so
 tests that use a module client must run from a module in this repository. `.dagger/modules/rails`, in
 Ruby, replaces dagger/ruby's `rails` module and calls its `ruby` module through a module client. The
-upstream `rails:server` and `rails:assets` functions are gone: the example has lint, test, audit and
-scan, but no asset build. Serve the app with `bin/rails db:prepare` and `bin/rails server` on the host.
+upstream `rails:assets` function is gone: the example has lint, test, audit, scan and a development
+server, but no asset build.
 
 ## Pinning
 

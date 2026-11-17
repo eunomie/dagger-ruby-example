@@ -15,6 +15,16 @@
             }
           ],
           "returns": "void"
+        },
+        "server": {
+          "line": 22,
+          "params": [
+            {
+              "name": "ws",
+              "type": "Dagger::Clients::Core::Workspace"
+            }
+          ],
+          "returns": "Dagger::Clients::Core::Service"
         }
       }
     }
