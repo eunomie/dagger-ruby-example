@@ -5,3 +5,4 @@
 ["","git-latest",["github.com/dagger/ruby-sdk",["version","v1.1.0"]],"refs/tags/v1.1.0"]
 ["","git-sha",["github.com/dagger/ruby","main"],"11179d8121ce13f4eff461bd5564e9c0db05787e"]
 ["","git-sha",["github.com/dagger/ruby-sdk","refs/tags/v1.1.0"],"b8342f909f48311ec200eac4231b6a7eb78bd7f8"]
+["","oci-sha",["docker.io/library/postgres:17-alpine"],"sha256:a77aa70e641402a21411b92b721c58d10f23b50ae5fdd2333efd22d166e1e5f7"]
