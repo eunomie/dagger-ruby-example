@@ -20,11 +20,16 @@ clients = ["./.dagger/modules/postgres"]
 is-module = true
 name = "postgres"
 
-[modules.rails]
-source = ".dagger/modules/rails"
+[modules.dagger-ruby-example-dev]
 main = true
+source = ".dagger/modules/dagger-ruby-example-dev"
 
-[sdks.ruby.scopes.".dagger/modules/rails"]
+[sdks.ruby.scopes.".dagger/modules/dagger-ruby-example-dev"]
 is-module = true
-name = "rails"
-clients = ["github.com/dagger/ruby/ruby@8cb0f248e67e833ee4d12eb0bae32622e54fc418"]
+clients = ["github.com/dagger/ruby/ruby@11179d8121ce13f4eff461bd5564e9c0db05787e"]
+
+[modules.rails]
+source = "github.com/dagger/ruby/rails"
+
+[modules.rails.check]
+skip = ["test"]

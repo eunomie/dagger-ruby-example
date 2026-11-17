@@ -1,0 +1,22 @@
+{
+  "lib/dagger_ruby_example_dev.rb": [
+    {
+      "class": "DaggerRubyExampleDev",
+      "nesting": [
+        "DaggerRubyExampleDev"
+      ],
+      "methods": {
+        "test": {
+          "line": 13,
+          "params": [
+            {
+              "name": "ws",
+              "type": "Dagger::Clients::Core::Workspace"
+            }
+          ],
+          "returns": "void"
+        }
+      }
+    }
+  ]
+}
