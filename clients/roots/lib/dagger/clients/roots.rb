@@ -14,6 +14,7 @@ module Dagger
 
       def core(session: nil) = ::Dagger::Clients::Core.core(session:)
 
+      # A disposable Postgres server for tests
       def postgres(session: nil)
         ::Dagger::Clients::Postgres.postgres(session:)
       end

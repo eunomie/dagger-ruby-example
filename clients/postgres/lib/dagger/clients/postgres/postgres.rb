@@ -3,6 +3,7 @@
 module Dagger
   module Clients
     module Postgres
+      # A disposable Postgres server for tests
       class Postgres < ::Dagger::Type
         include ::Dagger::Clients::Core::Node
 

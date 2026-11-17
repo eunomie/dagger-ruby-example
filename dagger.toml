@@ -1,6 +1,3 @@
-[modules.rails]
-source = ".dagger/modules/rails"
-
 [modules.rubocop]
 source = "github.com/dagger/ruby/rubocop@main"
 
@@ -10,9 +7,6 @@ source = "github.com/dagger/ruby/bundler-audit@main"
 [modules.brakeman]
 source = "github.com/dagger/ruby/brakeman@main"
 
-[modules.postgres]
-source = ".dagger/modules/postgres"
-
 [modules.ruby-sdk]
 source = "github.com/dagger/ruby-sdk@v1.1.0"
 
@@ -21,3 +15,18 @@ module = "ruby-sdk"
 
 [sdks.ruby.scopes."."]
 clients = ["./.dagger/modules/postgres"]
+
+[modules.postgres]
+source = ".dagger/modules/postgres"
+
+[sdks.ruby.scopes.".dagger/modules/postgres"]
+is-module = true
+name = "postgres"
+
+[modules.rails]
+source = ".dagger/modules/rails"
+
+[sdks.ruby.scopes.".dagger/modules/rails"]
+is-module = true
+name = "rails"
+clients = ["github.com/dagger/ruby/ruby@8cb0f248e67e833ee4d12eb0bae32622e54fc418"]

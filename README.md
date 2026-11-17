@@ -7,8 +7,8 @@ Minitest test that starts Postgres through a generated module client.
 
 - `app/`, `config/`, `db/schema.rb`, `test/`: a Rails 8.1 app on SQLite.
 - `test/integration/postgres_container_test.rb`: starts Postgres from the Postgres module and queries it.
-- `.dagger/modules/postgres/`: a local Dang module whose `service` returns a Postgres service.
-- `.dagger/modules/rails/`: a local Dang module whose `test` check runs `bin/rails test`.
+- `.dagger/modules/postgres/`: a Ruby SDK module whose `service` returns a Postgres service.
+- `.dagger/modules/rails/`: a Ruby SDK module whose `test` check runs `bin/rails test`.
 - `dagger.toml`, `dagger.lock`: the workspace modules and their pinned refs.
 - `sdk/`, `clients/`, `dagger.gemfile`: the generated Ruby SDK and module client, `test` group only. Do not edit them.
 
@@ -45,13 +45,13 @@ dagger run bin/rails test test/integration
 ## Why a local `rails` module
 
 The engine resolves a module client's local module path against the module that runs the code, so
-tests that use a module client must run from a module in this repository. `.dagger/modules/rails`
-replaces dagger/ruby's `rails` module and reuses its `ruby` module. The upstream `rails:server` and
-`rails:assets` functions are gone: the example has lint, test, audit and scan, but no asset build.
-Serve the app on the host with `bin/rails db:prepare` and then `bin/rails server`.
+tests that use a module client must run from a module in this repository. `.dagger/modules/rails`, in
+Ruby, replaces dagger/ruby's `rails` module and calls its `ruby` module through a module client. The
+upstream `rails:server` and `rails:assets` functions are gone: the example has lint, test, audit and
+scan, but no asset build. Serve the app with `bin/rails db:prepare` and `bin/rails server` on the host.
 
 ## Pinning
 
 `dagger.toml` installs dagger/ruby's `rubocop`, `bundler-audit` and `brakeman` modules from `@main`;
-`dagger.lock` pins `main` to one commit, and `dagger lock update` moves it.
-`.dagger/modules/rails/dagger-module.toml` pins dagger/ruby's `ruby` module to commit `8cb0f24`.
+`dagger.lock` pins `main` to one commit, and `dagger lock update` moves it. The rails scope in
+`dagger.toml` pins the `ruby` module client to commit `8cb0f24`.

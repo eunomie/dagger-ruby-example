@@ -14,6 +14,7 @@ module Dagger
 
       autoload :Postgres, "dagger/clients/postgres/postgres"
 
+      # A disposable Postgres server for tests
       def self.postgres(session: nil)
         ::Dagger::Clients::Postgres::Postgres.new(::Dagger::Client.root(TARGET, "postgres", {}, session:))
       end
