@@ -16,15 +16,13 @@ module = "ruby-sdk"
 [sdks.ruby.scopes."."]
 clients = ["./.dagger/modules/postgres"]
 
-[modules.postgres]
-source = ".dagger/modules/postgres"
-
 [sdks.ruby.scopes.".dagger/modules/postgres"]
 is-module = true
 name = "postgres"
 
 [modules.rails]
 source = ".dagger/modules/rails"
+main = true
 
 [sdks.ruby.scopes.".dagger/modules/rails"]
 is-module = true
