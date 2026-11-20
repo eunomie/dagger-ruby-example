@@ -4,9 +4,7 @@ module Dagger
   module Clients
     module Core
       class ImageMediaTypes < ::Dagger::Enum
-        OCIMediaTypes: ImageMediaTypes
         OCI: ImageMediaTypes
-        DockerMediaTypes: ImageMediaTypes
         DOCKER: ImageMediaTypes
       end
     end

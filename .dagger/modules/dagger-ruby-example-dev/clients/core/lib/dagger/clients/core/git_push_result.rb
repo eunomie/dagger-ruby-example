@@ -11,7 +11,7 @@ module Dagger
 
         # The previous remote object ID; empty when the ref was created.
         def previous_sha
-          @query.select("previousSHA").execute
+          @query.select("previousSha").execute
         end
 
         # The fully qualified remote ref.

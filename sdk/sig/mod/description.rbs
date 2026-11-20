@@ -1,8 +1,6 @@
 module Dagger
   module Mod
     module Description
-      def self.plain: (untyped value) -> untyped
-
       class TypeRef < Data
         attr_reader kind: String
         attr_reader name: String
@@ -35,9 +33,10 @@ module Dagger
         attr_reader generator: bool
         attr_reader up: bool
         attr_reader agent: bool
+        attr_reader cache: String?
         attr_reader args: Array[Argument]
 
-        def self.new: (String, TypeRef, String?, String?, bool, bool, bool, bool, Array[Argument]) -> Function
+        def self.new: (String, TypeRef, String?, String?, bool, bool, bool, bool, String?, Array[Argument]) -> Function
       end
 
       class Field < Data
@@ -94,7 +93,6 @@ module Dagger
 
         def self.new: (main_object: String, description: String?, objects: Array[ObjectType], enums: Array[Enum])
                     -> Module
-        def to_json: (*untyped) -> String
       end
     end
   end

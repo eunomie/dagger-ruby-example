@@ -11,6 +11,9 @@ module Dagger
       ARGUMENT = /\A[a-z_][a-z0-9_]*\z/
       ROOTS = "Dagger::Clients::Roots".freeze
       EXAMPLE = "#: (name: String) -> String".freeze
+      # Whole hours, minutes and seconds, which Go's time.ParseDuration reads exactly; the engine takes one second
+      # to a week.
+      TIME_TO_LIVE = /\A(?:\d+[hms])+\z/
 
       attr_reader :objects, :enums, :interfaces
 
@@ -49,6 +52,13 @@ module Dagger
 
       def fields(klass) = @fields.fetch(klass)
 
+      def field_args(klass)
+        fields(klass).values.map do |field|
+          ArgDecl.new(field.name, field.type, nil, field.default, !field.default.equal?(UNSET), nil, field.ignore,
+                      field.doc, field.deprecated)
+        end
+      end
+
       def functions(klass) = @functions.fetch(klass)
 
       def constructor(klass) = @constructors.fetch(klass)
@@ -61,7 +71,7 @@ module Dagger
         objects = @objects.map { describe_object(it, main: it.equal?(main)) } +
                   @interfaces.map { describe_interface(it) }
         Description::Module.new(
-          main_object:,
+          main_object: type_name(main),
           description: main.dagger_description,
           objects: objects.sort_by(&:name),
           enums: @enums.sort_by { type_name(it) }.map { describe_enum(it) }
@@ -87,6 +97,11 @@ module Dagger
       private
 
       def missing_main(name)
+        unless name
+          return "the engine takes none of #{@objects.map { type_name(it) }.join(", ")} as the main object: lib/ " \
+                 "must define a class named after the module with `extend Dagger::Mod::Object`"
+        end
+
         "the main object #{name} is not registered: lib/ must define class #{name} with `extend Dagger::Mod::Object`"
       end
 
@@ -214,7 +229,7 @@ module Dagger
       def describe_object(klass, main:)
         name = type_name(klass)
         fields = fields(klass).values.reject(&:private).map do |field|
-          Description::Field.new(Naming.api_name(field.name), type_ref(field.type, "#{name}.#{field.name}"), field.doc,
+          Description::Field.new(field.name.to_s, type_ref(field.type, "#{name}.#{field.name}"), field.doc,
                                  field.deprecated)
         end
         functions = functions(klass).values.map { describe_function(klass, it) }
@@ -249,31 +264,38 @@ module Dagger
         declared = constructor(klass)
         return describe_function(klass, declared) if declared
 
-        args = fields(klass).values.map do |field|
-          ArgDecl.new(field.name, field.type, nil, field.default, !field.default.equal?(UNSET), nil, field.ignore,
-                      field.doc, field.deprecated)
-        end
-        Description::Function.new("", object_ref(klass), nil, nil, false, false, false, false,
-                                  args.map { describe_arg(type_name(klass), it) })
+        Description::Function.new("", object_ref(klass), nil, nil, false, false, false, false, nil,
+                                  field_args(klass).map { describe_arg(type_name(klass), it) })
       end
 
       def describe_function(klass, decl)
         where = "#{type_name(klass)}.#{decl.method_name}"
-        if decl.cache
-          raise RegistrationError, "#{where}: a cache policy needs a per-call signal the generated entrypoint lacks"
-        end
-
+        check_cache(member_at(klass, :function, decl.method_name), decl.cache)
         returns = decl.constructor ? object_ref(klass) : type_ref(decl.returns, "#{where} result")
         name = decl.constructor ? "" : function_name(decl, where)
         Description::Function.new(name, returns, decl.doc, decl.deprecated, decl.check, decl.generator, decl.start,
-                                  decl.agent, decl.args.map { describe_arg(where, it) })
+                                  decl.agent, decl.cache, decl.args.map { describe_arg(where, it) })
+      end
+
+      def check_cache(member, cache)
+        return if cache.nil? || %w[never session].include?(cache)
+
+        if cache.is_a?(String) && cache.match?(TIME_TO_LIVE)
+          seconds = cache.split(/(?<=[hms])/).sum do |part|
+            part.to_i * { "h" => 3600, "m" => 60, "s" => 1 }.fetch(part.delete("0-9"))
+          end
+          return if seconds.between?(1, 168 * 3600)
+        end
+
+        raise RegistrationError, "#{member}: cache: takes \"never\", \"session\" or a time to live from 1s to 168h, " \
+                                 "such as \"5m\" or \"1h30m\", not #{cache.inspect}"
       end
 
       def function_name(decl, where)
         return decl.api_name if decl.api_name
         raise RegistrationError, "#{where}: a name ending in ? or ! needs name:" if decl.method_name.end_with?("?", "!")
 
-        Naming.api_name(decl.method_name)
+        decl.method_name.to_s
       end
 
       # A keyword whose default only Ruby knows is optional to callers, who
@@ -284,7 +306,7 @@ module Dagger
 
         type = type_ref(arg.type, context, optional: arg.optional && arg.default.equal?(UNSET))
         Description::Argument.new(
-          arg.api_name || Naming.api_name(arg.ruby_name), type, arg.doc, default_json(arg.default, type, context),
+          arg.api_name || arg.ruby_name.to_s, type, arg.doc, default_json(arg.default, type, context),
           arg.default_address, arg.ignore, arg.deprecated
         )
       end
