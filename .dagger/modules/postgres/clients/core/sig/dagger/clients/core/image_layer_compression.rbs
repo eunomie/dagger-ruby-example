@@ -4,13 +4,9 @@ module Dagger
   module Clients
     module Core
       class ImageLayerCompression < ::Dagger::Enum
-        Gzip: ImageLayerCompression
         GZIP: ImageLayerCompression
-        Zstd: ImageLayerCompression
         ZSTD: ImageLayerCompression
-        EStarGZ: ImageLayerCompression
         ESTARGZ: ImageLayerCompression
-        Uncompressed: ImageLayerCompression
         UNCOMPRESSED: ImageLayerCompression
       end
     end

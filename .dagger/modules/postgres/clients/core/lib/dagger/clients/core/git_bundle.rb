@@ -20,8 +20,8 @@ module Dagger
         end
 
         # Commits that must already exist wherever this bundle is applied.
-        def prerequisite_sh_as
-          @query.select("prerequisiteSHAs").execute
+        def prerequisite_shas
+          @query.select("prerequisiteShas").execute
         end
 
         # Bundle format version (2 or 3).

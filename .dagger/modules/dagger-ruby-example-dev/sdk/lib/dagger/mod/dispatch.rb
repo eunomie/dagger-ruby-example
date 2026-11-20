@@ -40,7 +40,7 @@ module Dagger
           if decl
             user_code { klass.create(**arguments(decl.args, args, where)) }
           else
-            user_code { klass.new(**field_arguments(klass, args, where)) }
+            user_code { klass.new(**arguments(@registry.field_args(klass), args, where)) }
           end
         @convert.output(object, klass, where)
       end
@@ -48,7 +48,7 @@ module Dagger
       def invoke(klass, state, name, args)
         type_name = @registry.type_name(klass)
         functions = @registry.functions(klass).each_value
-        decl = functions.find { (it.api_name || Naming.api_name(it.method_name)) == name } or
+        decl = functions.find { (it.api_name || it.method_name.to_s) == name } or
           raise InvalidInputError, "#{type_name} has no function #{name}"
         where = "#{type_name}.#{decl.method_name}"
         receiver = @convert.restore(klass, state, "#{type_name} state")
@@ -62,19 +62,12 @@ module Dagger
       def arguments(decls, args, where)
         kwargs = {} #: Hash[Symbol, untyped]
         decls.each do |arg|
-          value = args[arg.api_name || Naming.api_name(arg.ruby_name)]
+          value = args[arg.api_name || arg.ruby_name.to_s]
           next if value.nil? && arg.optional
 
           kwargs[arg.ruby_name] = @convert.input(value, arg.type, "#{where}(#{arg.ruby_name})")
         end
         kwargs
-      end
-
-      def field_arguments(klass, args, where)
-        decls = @registry.fields(klass).values.map do |field|
-          ArgDecl.new(field.name, field.type, nil, field.default, !field.default.equal?(UNSET), nil, nil, nil, nil)
-        end
-        arguments(decls, args, where)
       end
 
       def user_code
