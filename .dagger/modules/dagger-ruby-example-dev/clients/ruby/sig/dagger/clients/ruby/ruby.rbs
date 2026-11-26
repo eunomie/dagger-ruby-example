@@ -10,7 +10,8 @@ module Dagger
         def base: () -> ::Dagger::Clients::Core::Container?
         def path: () -> ::String
         def container: (ws: ::Dagger::Clients::Core::Workspace) -> ::Dagger::Clients::Core::Container
-        def run: (ws: ::Dagger::Clients::Core::Workspace, tool: ::String, command: ::Array[::String]) -> nil
+        def files: (ws: ::Dagger::Clients::Core::Workspace, globs: ::Array[::String], ?exclude: ::Array[::String]?) -> ::Array[::String]
+        def run: (ws: ::Dagger::Clients::Core::Workspace, tool: ::String, command: ::Array[::String], ?files: ::Array[::String]?, ?suite: ::String?) -> nil
       end
     end
   end

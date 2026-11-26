@@ -5,8 +5,8 @@ module Dagger
     module Ruby
       NAME = "ruby".freeze
       REF = "https://github.com/dagger/ruby/ruby@v1".freeze
-      PIN = "11179d8121ce13f4eff461bd5564e9c0db05787e".freeze
-      CORE_DIGEST = "sha256:d2bb153ec234c81f03f78497bf78d70e12f23defa6266ab1497eb88dc2408bab".freeze
+      PIN = "f13eda0f3e80c5d8ea62d4fa859a49ee94c3409e".freeze
+      CORE_DIGEST = "sha256:259e7b1367309d7244b5a9050bc3549d95ec7ebba01fddb82f61c83e05705e06".freeze
     end
   end
 end
