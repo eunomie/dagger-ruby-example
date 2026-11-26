@@ -33,3 +33,16 @@ source = "dagger.io/ruby/rails@v1"
 
 [modules.rails.check]
 skip = ["test"]
+
+[modules.go-sdk]
+source = "dagger.io/sdk/go@main"
+
+[sdks.go]
+module = "go-sdk"
+
+[modules.my-module]
+source = ".dagger/modules/my-module"
+
+[sdks.go.scopes.".dagger/modules/my-module"]
+is-module = true
+name = "my-module"

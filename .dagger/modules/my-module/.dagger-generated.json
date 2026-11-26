@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "files": {
+    "cmd/my-module-dispatch/main.go": "3b7ae4495672a9b983e05149502f5aa0cd5d5c7cae88c03f2d1608fc25942030",
+    "dagger.gen.go": "f4e105558c9d66384023f26926ff466eef1cff047a1eb10b9f029a392a06e169",
+    "internal/dagger/dagger.gen.go": "c5c37bff47e076929acd1d420db61a264cf2a9bc0d0f19d186d9ca00789ea385",
+    "internal/dagger/entrypoint/main.dang": "0e738a5acaa719374948df0f366cb49e2279a4c90e7618c1f3e9c0ee376ff13d"
+  }
+}
