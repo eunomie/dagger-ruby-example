@@ -2,6 +2,7 @@
 # Any Dagger command may update this file; always commit it with your changes.
 # Run `dagger lock update` to refresh the pinned versions.
 [["version","2"]]
+["","git-latest",["github.com/dagger/ruby",["tagPrefix","bundle"]],"refs/tags/bundle/v1.0.0"]
 ["","git-latest",["github.com/dagger/ruby",["tagPrefix","bundler-audit"],["version","v1"]],"refs/tags/bundler-audit/v1.0.0"]
 ["","git-latest",["github.com/dagger/ruby",["tagPrefix","rails"],["version","v1"]],"refs/tags/rails/v1.1.0"]
 ["","git-latest",["github.com/dagger/ruby",["tagPrefix","rails"]],"refs/tags/rails/v1.1.0"]
@@ -11,6 +12,7 @@
 ["","git-latest",["github.com/dagger/ruby-sdk",["version","v1.4.0"]],"refs/tags/v1.4.0"]
 ["","git-sha",["github.com/dagger/ruby","main"],"f13eda0f3e80c5d8ea62d4fa859a49ee94c3409e"]
 ["","git-sha",["github.com/dagger/ruby","refs/heads/main"],"f13eda0f3e80c5d8ea62d4fa859a49ee94c3409e"]
+["","git-sha",["github.com/dagger/ruby","refs/tags/bundle/v1.0.0"],"9504fcc9baaf74bb1df56b8a339b01daa8cac99b"]
 ["","git-sha",["github.com/dagger/ruby","refs/tags/bundler-audit/v1.0.0"],"11179d8121ce13f4eff461bd5564e9c0db05787e"]
 ["","git-sha",["github.com/dagger/ruby","refs/tags/rails/v1.0.0"],"11179d8121ce13f4eff461bd5564e9c0db05787e"]
 ["","git-sha",["github.com/dagger/ruby","refs/tags/rails/v1.1.0"],"f13eda0f3e80c5d8ea62d4fa859a49ee94c3409e"]
@@ -20,6 +22,7 @@
 ["","git-sha",["github.com/dagger/ruby-sdk","refs/tags/v1.4.0"],"5ea8292f43c72aaa0ae9c6e6c7d165f76f4fdab9"]
 ["","oci-sha",["docker.io/library/postgres:17-alpine"],"sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73"]
 ["","vanity-url",["https://dagger.io/ruby/brakeman"],"https://github.com/dagger/ruby/brakeman"]
+["","vanity-url",["https://dagger.io/ruby/bundle"],"https://github.com/dagger/ruby/bundle"]
 ["","vanity-url",["https://dagger.io/ruby/bundler-audit"],"https://github.com/dagger/ruby/bundler-audit"]
 ["","vanity-url",["https://dagger.io/ruby/rails"],"https://github.com/dagger/ruby/rails"]
 ["","vanity-url",["https://dagger.io/ruby/rubocop"],"https://github.com/dagger/ruby/rubocop"]

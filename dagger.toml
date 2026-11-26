@@ -33,3 +33,6 @@ source = "dagger.io/ruby/rails@v1"
 
 [modules.rails.check]
 skip = ["tests/test"]
+
+[modules.bundle]
+source = "dagger.io/ruby/bundle"
