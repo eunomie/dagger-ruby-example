@@ -32,4 +32,4 @@ clients = ["dagger.io/ruby/ruby@v1"]
 source = "dagger.io/ruby/rails@v1"
 
 [modules.rails.check]
-skip = ["test"]
+skip = ["tests/test"]
