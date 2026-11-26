@@ -31,9 +31,18 @@ module Dagger
           ::Dagger::Clients::Core::Container.new(@query.select("container", ws:))
         end
 
-        # Run a tool's command in the project root and fail with its output.
-        def run(ws:, tool:, command:)
-          @query.select("run", ws:, tool:, command:).execute(allow_nil: true)
+        # Paths of the files under the project root that match any of globs and none
+        # of exclude, relative to the root.
+        def files(ws:, globs:, exclude: nil)
+          @query.select("files", ws:, globs:, exclude:).execute
+        end
+
+        # Run a tool's command in the project root and fail with its output. Files,
+        # when given, follow the command; an empty list runs nothing. With suite, the
+        # run sends a session span named suite and one span per test to the trace
+        # Dagger provides.
+        def run(ws:, tool:, command:, files: nil, suite: nil)
+          @query.select("run", ws:, tool:, command:, files:, suite:).execute(allow_nil: true)
           nil
         end
       end

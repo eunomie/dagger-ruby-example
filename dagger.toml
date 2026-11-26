@@ -8,7 +8,7 @@ source = "dagger.io/ruby/bundler-audit@v1"
 source = "dagger.io/ruby/brakeman@main"
 
 [modules.ruby-sdk]
-source = "dagger.io/sdk/ruby@v1.2.0"
+source = "dagger.io/sdk/ruby@v1.4.0"
 
 [sdks.ruby]
 module = "ruby-sdk"
@@ -32,4 +32,7 @@ clients = ["dagger.io/ruby/ruby@v1"]
 source = "dagger.io/ruby/rails@v1"
 
 [modules.rails.check]
-skip = ["test"]
+skip = ["tests/test"]
+
+[modules.bundle]
+source = "dagger.io/ruby/bundle"
